@@ -1,6 +1,6 @@
 {
   "name": "@wha7ever/dsh-firefly-theme",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Firefly-inspired light and dark theme for the DeepSeek Harness Web UI",
   "type": "module",
   "main": "lib/index.js",

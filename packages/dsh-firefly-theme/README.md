@@ -1,11 +1,11 @@
 # @wha7ever/dsh-firefly-theme
 
-A small, dependency-free DSH Web UI theme. It overlays the active light/dark theme with a mint and teal palette and supplies an inherited body text color for UI surfaces that do not declare their own foreground color.
+A small, dependency-free DSH Web UI theme. It overlays the active light/dark theme with a mint and teal palette, supplies an inherited body text color for UI surfaces that do not declare their own foreground color, and keeps model IDs in the model picker readable against the Firefly palette.
 
 ## Install
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
+dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.2
 ```
 
 The package is a DSH bundle. Its `cordis.patch.yml` inserts the `firefly-theme` row, so the profile does not need a duplicate row in its personal patch file.
@@ -14,6 +14,7 @@ The package is a DSH bundle. Its `cordis.patch.yml` inserts the `firefly-theme` 
 
 - Overrides the documented `--dsw-alias-*` theme tokens in both light and dark modes.
 - Injects a disposable `body` color rule for DSH surfaces that inherit their foreground color.
+- Applies the primary label token to model IDs in the model picker so they remain legible in both color schemes.
 - Removes the token layer and style element when the plugin is unloaded.
 
 The package contains no model routes, credentials, MCP endpoints, or profile configuration.

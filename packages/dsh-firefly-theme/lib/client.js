@@ -22,7 +22,7 @@ window.__ModuleLoader__.load({
       '--dsw-specific-sidebar-fill': { light: '#E9F4EC', dark: '#0C1714' },
     };
 
-    const TEXT_COLOR_CSS = 'body{color:var(--dsw-alias-label-primary)}';
+    const TEXT_COLOR_CSS = 'body{color:var(--dsw-alias-label-primary)}[class*="candidateList"] [class*="candidateId"]{color:var(--dsw-alias-label-primary)}';
 
     function installInheritedTextColor(ctx) {
       ctx.effect(() => {

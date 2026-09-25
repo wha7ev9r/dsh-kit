@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## 0.1.2 — 2026-09-25
+
+- Improve model-ID contrast in the Firefly theme's model picker.
+
 ## 0.1.0 — 2026-09-25
 
 - Initial public monorepo.
