@@ -11,7 +11,7 @@ These packages use DSH bundle and client contracts that are still evolving. They
 | Node.js used for local inspection | `v26.3.0` |
 | Package manager | `pnpm@12.4.1` |
 
-The baseline was checked against the installed DSH package and the live Host/Client inspection providers. The original local plugins were live before the public-package migration; the newly named packages must still be installed once and verified in the target profile after their first publication.
+The baseline was checked against the installed DSH package and the live Host/Client inspection providers. The published `0.1.1` packages were installed into both local profiles through npm; the web/headless package manifests and locks contain exact versions, the composed rows resolve to `@wha7ever/*`, and the live `settings.section` slot reports `mcp-servers` active. A newly created Agent is required to observe the Host tool registry after a live profile reload.
 
 ## Contracts used
 
