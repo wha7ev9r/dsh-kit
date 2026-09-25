@@ -5,7 +5,7 @@ A small, dependency-free DSH Web UI theme. It overlays the active light/dark the
 ## Install
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
 ```
 
 The package is a DSH bundle. Its `cordis.patch.yml` inserts the `firefly-theme` row, so the profile does not need a duplicate row in its personal patch file.

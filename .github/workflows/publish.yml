@@ -39,19 +39,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Validate package sources
         run: pnpm run check
-      - name: Check npm authentication
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
-            echo "NPM_TOKEN was not available to this job" >&2
-            exit 1
-          fi
-          echo "NPM_TOKEN is available"
-          pnpm whoami --registry=https://registry.npmjs.org
-      - name: Publish selected packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish selected packages with npm Trusted Publishing
         run: |
           if [ "${{ inputs.package }}" = "theme" ] || [ "${{ inputs.package }}" = "both" ]; then
             pnpm --filter @wha7ever/dsh-firefly-theme publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks

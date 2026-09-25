@@ -1,6 +1,6 @@
 {
   "name": "@wha7ever/dsh-mcp-console",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server inspection and controls for the DeepSeek Harness Web UI",
   "type": "module",
   "main": "lib/index.js",

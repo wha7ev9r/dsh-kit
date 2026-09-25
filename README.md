@@ -12,11 +12,11 @@
 Both packages are ordinary DSH bundles. After publication, install the exact version that matches the compatibility baseline:
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.0
-dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
+dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.1
 
 # The Host tools are useful in a headless profile too; the browser panel is not mounted there.
-dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.0
+dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.1
 ```
 
 `dsh plugin` writes the selected bundles to the target profile's own `package.json` and manages its local `node_modules`; no copy or synchronization step is required.
@@ -69,7 +69,7 @@ A `link:` installation is a development convenience. Once a version is published
 3. Publish the packages to npm with public access.
 4. Tag the Git commit and update [`CHANGELOG.md`](CHANGELOG.md) and [`COMPATIBILITY.md`](COMPATIBILITY.md) when the verified DSH baseline changes.
 
-The repository includes a manual GitHub Actions publish workflow. Configure an `NPM_TOKEN` repository secret before using it, then trigger the workflow from the Actions tab or with:
+The repository includes a manual GitHub Actions publish workflow. After the one-time first release, configure each package's npm Trusted Publisher to allow `wha7ev9r/dsh-kit` and workflow `publish.yml`; the workflow then uses GitHub OIDC and no npm token. Trigger it from the Actions tab or with:
 
 ```powershell
 gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=both
