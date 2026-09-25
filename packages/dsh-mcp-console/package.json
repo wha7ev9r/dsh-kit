@@ -27,6 +27,7 @@
     "url": "https://github.com/wha7ev9r/dsh-kit/issues"
   },
   "homepage": "https://github.com/wha7ev9r/dsh-kit/tree/main/packages/dsh-mcp-console#readme",
+  "icon": "./icon.svg",
   "keywords": [
     "dsh",
     "deepseek-harness",
