@@ -45,8 +45,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ "${{ inputs.package }}" = "theme" ] || [ "${{ inputs.package }}" = "both" ]; then
-            pnpm --filter @wha7ev9r/dsh-firefly-theme publish --access public --provenance --no-git-checks
+            pnpm --filter @wha7ev9r/dsh-firefly-theme publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
           fi
           if [ "${{ inputs.package }}" = "console" ] || [ "${{ inputs.package }}" = "both" ]; then
-            pnpm --filter @wha7ev9r/dsh-mcp-console publish --access public --provenance --no-git-checks
+            pnpm --filter @wha7ev9r/dsh-mcp-console publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
           fi
