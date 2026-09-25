@@ -1,0 +1,23 @@
+name: Configure npm trusted publishing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Configure both package publishers
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm trust github @wha7ever/dsh-firefly-theme --file publish.yml --repo wha7ev9r/dsh-kit --allow-publish --yes --registry=https://registry.npmjs.org
+          npm trust github @wha7ever/dsh-mcp-console --file publish.yml --repo wha7ev9r/dsh-kit --allow-publish --yes --registry=https://registry.npmjs.org
