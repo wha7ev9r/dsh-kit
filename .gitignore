@@ -1,0 +1,23 @@
+# Dependencies and local package-manager state
+node_modules/
+.pnpm-store/
+
+# Generated package archives and coverage output
+*.tgz
+coverage/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.credentials.yaml
+
+# DSH runtime output
+cordis.yml
+*.log
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

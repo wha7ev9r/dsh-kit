@@ -1,0 +1,15 @@
+{
+  "name": "@wha7ev9r/dsh-kit-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A public monorepo for wha7ev9r's DeepSeek Harness plugins and themes",
+  "type": "module",
+  "packageManager": "pnpm@12.4.1",
+  "scripts": {
+    "check": "node scripts/check-workspace.mjs",
+    "audit": "pnpm audit --registry=https://registry.npmjs.org --audit-level=high"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

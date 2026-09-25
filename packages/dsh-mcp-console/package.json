@@ -1,0 +1,55 @@
+{
+  "name": "@wha7ev9r/dsh-mcp-console",
+  "version": "0.1.0",
+  "description": "MCP server inspection and controls for the DeepSeek Harness Web UI",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "locale",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wha7ev9r/dsh-kit.git",
+    "directory": "packages/dsh-mcp-console"
+  },
+  "bugs": {
+    "url": "https://github.com/wha7ev9r/dsh-kit/issues"
+  },
+  "homepage": "https://github.com/wha7ev9r/dsh-kit/tree/main/packages/dsh-mcp-console#readme",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "mcp",
+    "console"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}
