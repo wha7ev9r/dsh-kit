@@ -22,7 +22,6 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: npm
     permissions:
       contents: read
       id-token: write
@@ -40,6 +39,15 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Validate package sources
         run: pnpm run check
+      - name: Check npm authentication
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "NPM_TOKEN was not available to this job" >&2
+            exit 1
+          fi
+          echo "NPM_TOKEN is available"
       - name: Publish selected packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
