@@ -17,6 +17,8 @@ function assertPackageShape(manifest, packageDir) {
   check(manifest.version && /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(manifest.version), `${packageDir}: invalid semver`)
   check(manifest.license === 'MIT', `${packageDir}: license must be MIT`)
   check(manifest.repository?.type === 'git', `${packageDir}: repository metadata is required`)
+  check(manifest.icon === './icon.svg', `${packageDir}: icon metadata is required`)
+  check(manifest.publishConfig?.access === 'public', `${packageDir}: publishConfig.access must be public`)
   check(manifest.dsh?.bundle?.patch === './cordis.patch.yml', `${packageDir}: dsh.bundle.patch is required`)
   check(manifest.dsh?.client?.platform === 'web', `${packageDir}: web client metadata is required`)
   check(manifest.exports?.['./client'] === './lib/client.js', `${packageDir}: ./client export is required`)
