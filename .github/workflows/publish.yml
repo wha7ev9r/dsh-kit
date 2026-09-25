@@ -48,6 +48,7 @@ jobs:
             exit 1
           fi
           echo "NPM_TOKEN is available"
+          pnpm whoami --registry=https://registry.npmjs.org
       - name: Publish selected packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
