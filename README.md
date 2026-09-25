@@ -69,7 +69,7 @@ A `link:` installation is a development convenience. Once a version is published
 3. Publish the packages to npm with public access.
 4. Tag the Git commit and update [`CHANGELOG.md`](CHANGELOG.md) and [`COMPATIBILITY.md`](COMPATIBILITY.md) when the verified DSH baseline changes.
 
-The repository includes a manual GitHub Actions publish workflow. Configure an `NPM_TOKEN` repository secret before using it, then trigger the workflow from the Actions tab or with:
+The repository includes a manual GitHub Actions publish workflow. Configure an `NPM_TOKEN` secret in the repository's `npm` environment before using it, then trigger the workflow from the Actions tab or with:
 
 ```powershell
 gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=both
