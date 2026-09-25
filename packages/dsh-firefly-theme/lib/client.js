@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: '@wha7ev9r/dsh-firefly-theme',
+  id: '@wha7ever/dsh-firefly-theme',
   factory(require) {
     const module = { exports: {} };
     const exports = module.exports;
@@ -28,16 +28,16 @@ window.__ModuleLoader__.load({
       ctx.effect(() => {
         if (typeof document === 'undefined') return;
         const style = document.createElement('style');
-        style.dataset.plugin = '@wha7ev9r/dsh-firefly-theme';
-        style.dataset.pluginCss = '@wha7ev9r/dsh-firefly-theme/inherited-text-color';
+        style.dataset.plugin = '@wha7ever/dsh-firefly-theme';
+        style.dataset.pluginCss = '@wha7ever/dsh-firefly-theme/inherited-text-color';
         style.textContent = TEXT_COLOR_CSS;
         document.head.append(style);
         return () => style.remove();
-      }, '@wha7ev9r/dsh-firefly-theme: inherited text color');
+      }, '@wha7ever/dsh-firefly-theme: inherited text color');
     }
 
     function apply(ctx) {
-      ctx.effect(() => ctx.theme.overrideTokens('@wha7ev9r/dsh-firefly-theme', TOKENS));
+      ctx.effect(() => ctx.theme.overrideTokens('@wha7ever/dsh-firefly-theme', TOKENS));
       installInheritedTextColor(ctx);
     }
 

@@ -1,4 +1,4 @@
-# @wha7ev9r/dsh-mcp-console
+# @wha7ever/dsh-mcp-console
 
 A dependency-free DSH bundle that makes MCP rows visible and controllable from the Web settings page. It also registers two Host tools for agents:
 
@@ -8,10 +8,10 @@ A dependency-free DSH bundle that makes MCP rows visible and controllable from t
 ## Install
 
 ```powershell
-dsh plugin --profile web add @wha7ev9r/dsh-mcp-console@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.0
 
 # Optional: Host tools without the browser panel.
-dsh plugin --profile headless add @wha7ev9r/dsh-mcp-console@0.1.0
+dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.0
 ```
 
 The package owns its `mcp-console` row through `cordis.patch.yml`; no duplicate row is needed in the profile patch.

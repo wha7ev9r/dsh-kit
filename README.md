@@ -6,17 +6,17 @@
 
 | Package | Plane | Purpose |
 | --- | --- | --- |
-| [`@wha7ev9r/dsh-firefly-theme`](packages/dsh-firefly-theme) | Client | Firefly-inspired light/dark token theme for the DSH Web UI. |
-| [`@wha7ev9r/dsh-mcp-console`](packages/dsh-mcp-console) | Host + Client | A settings panel for inspecting and enabling/disabling MCP rows, plus the `mcp_status` and `mcp_toggle` model tools. |
+| [`@wha7ever/dsh-firefly-theme`](packages/dsh-firefly-theme) | Client | Firefly-inspired light/dark token theme for the DSH Web UI. |
+| [`@wha7ever/dsh-mcp-console`](packages/dsh-mcp-console) | Host + Client | A settings panel for inspecting and enabling/disabling MCP rows, plus the `mcp_status` and `mcp_toggle` model tools. |
 
 Both packages are ordinary DSH bundles. After publication, install the exact version that matches the compatibility baseline:
 
 ```powershell
-dsh plugin --profile web add @wha7ev9r/dsh-firefly-theme@0.1.0
-dsh plugin --profile web add @wha7ev9r/dsh-mcp-console@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.0
 
 # The Host tools are useful in a headless profile too; the browser panel is not mounted there.
-dsh plugin --profile headless add @wha7ev9r/dsh-mcp-console@0.1.0
+dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.0
 ```
 
 `dsh plugin` writes the selected bundles to the target profile's own `package.json` and manages its local `node_modules`; no copy or synchronization step is required.

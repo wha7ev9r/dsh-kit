@@ -12,7 +12,7 @@ function check(condition, message) {
 
 function assertPackageShape(manifest, packageDir) {
   const name = manifest.name || '<missing name>'
-  check(typeof name === 'string' && name.startsWith('@wha7ev9r/'), `${packageDir}: name must use the @wha7ev9r scope`)
+  check(typeof name === 'string' && name.startsWith('@wha7ever/'), `${packageDir}: name must use the @wha7ever scope`)
   check(manifest.private !== true, `${packageDir}: private packages cannot be published`)
   check(manifest.version && /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(manifest.version), `${packageDir}: invalid semver`)
   check(manifest.license === 'MIT', `${packageDir}: license must be MIT`)

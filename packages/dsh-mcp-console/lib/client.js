@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: '@wha7ev9r/dsh-mcp-console',
+  id: '@wha7ever/dsh-mcp-console',
   factory(require) {
     const module = { exports: {} };
     const exports = module.exports;
@@ -42,7 +42,7 @@ window.__ModuleLoader__.load({
 
     function apply(ctx) {
       const t = ctx.locale.bind(NS);
-      ctx.effect(() => ctx.locale.register(NS, { en, zh }), '@wha7ev9r/dsh-mcp-console: dictionaries');
+      ctx.effect(() => ctx.locale.register(NS, { en, zh }), '@wha7ever/dsh-mcp-console: dictionaries');
 
       const rpc = async (endpoint, payload) => {
         const result = await ctx.connection.rpc.call('/api', 'mcp-console', {

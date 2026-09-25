@@ -91,7 +91,7 @@ export function apply(ctx) {
           return envelope(rpcId, fail(error?.message ? error.message : String(error)))
         }
       },
-    }), '@wha7ev9r/dsh-mcp-console: /api/mcp-console')
+    }), '@wha7ever/dsh-mcp-console: /api/mcp-console')
   })
 
   ctx.effect(() => tools.register({
@@ -111,7 +111,7 @@ export function apply(ctx) {
     async execute() {
       return summarize(listServers(loader))
     },
-  }), '@wha7ev9r/dsh-mcp-console: mcp_status')
+  }), '@wha7ever/dsh-mcp-console: mcp_status')
 
   ctx.effect(() => tools.register({
     name: 'mcp_toggle',
@@ -135,5 +135,5 @@ export function apply(ctx) {
       await loader.update(args.id, { disabled: args.disabled })
       return summarize(listServers(loader))
     },
-  }), '@wha7ev9r/dsh-mcp-console: mcp_toggle')
+  }), '@wha7ever/dsh-mcp-console: mcp_toggle')
 }

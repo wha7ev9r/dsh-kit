@@ -1,4 +1,4 @@
 # Bundle patch: the package owns this row so a profile only needs to select the bundle.
 - insert:
     - id: firefly-theme
-      name: '@wha7ev9r/dsh-firefly-theme'
+      name: '@wha7ever/dsh-firefly-theme'
