@@ -21,3 +21,7 @@ cordis.yml
 Thumbs.db
 .vscode/
 .idea/
+
+# Local reference material, never published or committed
+anysearch-dsh/
+.scratch-dsh-compat/

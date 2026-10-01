@@ -1,0 +1,89 @@
+{
+  "name": "@wha7ever/dsh-web-search-anysearch",
+  "version": "0.2.0",
+  "description": "AnySearch web search and fetch providers plus advanced tools for DeepSeek Harness — community fork of @anysearch/anysearch-dsh, kept compatible with DSH 0.2",
+  "keywords": [
+    "anysearch",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "web-search",
+    "web-fetch"
+  ],
+  "homepage": "https://github.com/wha7ev9r/dsh-kit/tree/main/packages/dsh-web-search-anysearch#readme",
+  "bugs": {
+    "url": "https://github.com/wha7ev9r/dsh-kit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wha7ev9r/dsh-kit.git",
+    "directory": "packages/dsh-web-search-anysearch"
+  },
+  "license": "MIT",
+  "author": "wha7ever",
+  "type": "module",
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.test.json && vitest run && tsc -p tsconfig.json && node scripts/check-package.mjs",
+    "check:package": "tsc -p tsconfig.json && node scripts/check-package.mjs",
+    "prepare": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:e2e": "tsc -p tsconfig.json && node scripts/live-e2e.mjs",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test:compat": "pnpm run build && node scripts/check-dsh-compat.mjs"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.1-rc.1 <5",
+    "@deepseek-ai/dsh-credentials": ">=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-system-prompt": ">=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-tool-web": ">=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0",
+    "@deepseek-ai/dsh-web": ">=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": ">=3.18.1-rc.1 <4"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.4",
+    "@deepseek-ai/dsh-credentials": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-llm": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-tool-web": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-web": "0.2.0-rc.2",
+    "@types/node": "^22.20.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
+}

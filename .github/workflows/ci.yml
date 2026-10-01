@@ -24,5 +24,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Validate package sources
         run: pnpm run check
+      - name: Build and test the AnySearch plugin package
+        run: pnpm --filter @wha7ever/dsh-web-search-anysearch run check
       - name: Audit npm dependencies
         run: pnpm audit --registry=https://registry.npmjs.org --audit-level=high

@@ -11,6 +11,7 @@ on:
           - both
           - theme
           - console
+          - anysearch
 
 permissions:
   contents: read
@@ -46,4 +47,8 @@ jobs:
           fi
           if [ "${{ inputs.package }}" = "console" ] || [ "${{ inputs.package }}" = "both" ]; then
             pnpm --filter @wha7ever/dsh-mcp-console publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
+          fi
+          if [ "${{ inputs.package }}" = "anysearch" ]; then
+            pnpm --filter @wha7ever/dsh-web-search-anysearch run build
+            pnpm --filter @wha7ever/dsh-web-search-anysearch publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
           fi
