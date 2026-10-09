@@ -48,14 +48,16 @@ $DSH_HOME/
 
 ## Local development
 
-Install the workspace dependencies only when you intend to run the checks:
+Install the workspace dependencies only when you intend to run the checks. Development requires [Bun](https://bun.com) 1.4.2 or newer:
 
 ```powershell
-pnpm install --ignore-scripts
-pnpm run check
-pnpm --filter @wha7ever/dsh-web-search-anysearch run check
-pnpm audit --registry=https://registry.npmjs.org
+bun install --ignore-scripts
+bun run check
+bun run --filter @wha7ever/dsh-web-search-anysearch check
+bun run audit
 ```
+
+`bun run audit` pins the official npm registry, so a mirror configured in `~/.npmrc` cannot hide advisories.
 
 To try a package before it is published, use DSH's local-link installation from this repository:
 
@@ -69,7 +71,7 @@ A `link:` installation is a development convenience. Once a version is published
 
 ## Release checklist
 
-1. Run `pnpm run check` and `pnpm audit --registry=https://registry.npmjs.org`.
+1. Run `bun run check` and `bun run audit`.
 2. Inspect the packed file list for each package and verify that no `.env`, credential file, profile configuration, or local absolute path is present.
 3. Publish the packages to npm with public access.
 4. Tag the Git commit and update [`CHANGELOG.md`](CHANGELOG.md) and [`COMPATIBILITY.md`](COMPATIBILITY.md) when the verified DSH baseline changes.
@@ -82,7 +84,7 @@ gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=both
 gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=anysearch
 ```
 
-The workflow validates the workspace, publishes the selected public packages to the official npm registry, and requests provenance. npm's provenance and trusted-publisher options are documented by npm; do not put a token in a workflow file or commit.
+The workflow installs and validates the workspace with Bun, then publishes the selected public packages with the npm CLI. Publishing deliberately stays on npm: `bun publish` supports neither `--provenance` nor npm Trusted Publishing (GitHub OIDC) yet, so the release path keeps the npm CLI while everything else uses Bun. npm's provenance and trusted-publisher options are documented by npm; do not put a token in a workflow file or commit.
 
 ## License
 

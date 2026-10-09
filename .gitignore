@@ -1,6 +1,5 @@
 # Dependencies and local package-manager state
 node_modules/
-.pnpm-store/
 
 # Generated package archives and coverage output
 *.tgz
