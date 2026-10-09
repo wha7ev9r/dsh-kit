@@ -122,14 +122,14 @@ npx -y @deepseek-ai/dsh plugin --profile web remove @wha7ever/dsh-web-search-any
 ```sh
 git clone https://github.com/wha7ev9r/dsh-kit.git
 cd dsh-kit
-pnpm install --ignore-scripts
-pnpm --filter @wha7ever/dsh-web-search-anysearch run check
+bun install --ignore-scripts
+bun run --filter @wha7ever/dsh-web-search-anysearch check
 ```
 
 真实 AnySearch E2E 测试需要显式开启。匿名模式不会读取环境中的凭据：
 
 ```sh
-ANYSEARCH_E2E=1 ANYSEARCH_E2E_ANONYMOUS=1 pnpm --filter @wha7ever/dsh-web-search-anysearch run test:e2e
+ANYSEARCH_E2E=1 ANYSEARCH_E2E_ANONYMOUS=1 bun run --filter @wha7ever/dsh-web-search-anysearch test:e2e
 ```
 
 ## 许可证

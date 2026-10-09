@@ -122,14 +122,14 @@ This package lives in the [`wha7ev9r/dsh-kit`](https://github.com/wha7ev9r/dsh-k
 ```sh
 git clone https://github.com/wha7ev9r/dsh-kit.git
 cd dsh-kit
-pnpm install --ignore-scripts
-pnpm --filter @wha7ever/dsh-web-search-anysearch run check
+bun install --ignore-scripts
+bun run --filter @wha7ever/dsh-web-search-anysearch check
 ```
 
 The live AnySearch E2E suite is opt-in. Run it without ambient credentials in anonymous mode:
 
 ```sh
-ANYSEARCH_E2E=1 ANYSEARCH_E2E_ANONYMOUS=1 pnpm --filter @wha7ever/dsh-web-search-anysearch run test:e2e
+ANYSEARCH_E2E=1 ANYSEARCH_E2E_ANONYMOUS=1 bun run --filter @wha7ever/dsh-web-search-anysearch test:e2e
 ```
 
 ## License

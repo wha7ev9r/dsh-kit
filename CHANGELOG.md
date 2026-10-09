@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## Unreleased
+
+- Migrate the workspace from pnpm to Bun: `workspaces` in the root `package.json` replaces `pnpm-workspace.yaml`, `bun.lock` replaces `pnpm-lock.yaml`, and CI installs and validates with Bun.
+- Keep publishing on the npm CLI: `bun publish` supports neither `--provenance` nor npm Trusted Publishing (GitHub OIDC), so the release workflow installs with Bun and publishes with npm.
+- Pin the dependency audit to the official npm registry so a configured mirror cannot hide advisories.
+- Force `source-map-js` to `^1.2.2` through `overrides` (GHSA-68fv-2mgg-jv7q, high; dev-only through `vitest → vite → postcss`). The advisory was already present in `pnpm-lock.yaml`, and `bun audit fix` reports it blocked by postcss's range even though `^1.2.1` allows `1.2.2`.
+
 ## 0.1.0 — 2026-09-25
 
 - Initial public monorepo.

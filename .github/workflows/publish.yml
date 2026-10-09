@@ -34,21 +34,25 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      - name: Enable pnpm
-        run: corepack enable
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
       - name: Install locked workspace
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: bun install --frozen-lockfile --ignore-scripts
       - name: Validate package sources
-        run: pnpm run check
+        run: bun run check
+      # Bun installs and validates; publishing stays on the npm CLI because
+      # `bun publish` supports neither --provenance nor OIDC trusted publishing.
       - name: Publish selected packages with npm Trusted Publishing
         run: |
           if [ "${{ inputs.package }}" = "theme" ] || [ "${{ inputs.package }}" = "both" ]; then
-            pnpm --filter @wha7ever/dsh-firefly-theme publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
+            (cd packages/dsh-firefly-theme && npm publish --registry=https://registry.npmjs.org --access public --provenance)
           fi
           if [ "${{ inputs.package }}" = "console" ] || [ "${{ inputs.package }}" = "both" ]; then
-            pnpm --filter @wha7ever/dsh-mcp-console publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
+            (cd packages/dsh-mcp-console && npm publish --registry=https://registry.npmjs.org --access public --provenance)
           fi
           if [ "${{ inputs.package }}" = "anysearch" ]; then
-            pnpm --filter @wha7ever/dsh-web-search-anysearch run build
-            pnpm --filter @wha7ever/dsh-web-search-anysearch publish --registry=https://registry.npmjs.org --access public --provenance --no-git-checks
+            bun run --filter @wha7ever/dsh-web-search-anysearch build
+            (cd packages/dsh-web-search-anysearch && npm publish --registry=https://registry.npmjs.org --access public --provenance)
           fi
