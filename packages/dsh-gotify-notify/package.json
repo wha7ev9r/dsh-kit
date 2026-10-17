@@ -1,6 +1,6 @@
 {
   "name": "@wha7ever/dsh-gotify-notify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gotify push alerts for DeepSeek Harness: get pinged when the harness asks you a question, waits for an approval, finishes a turn, or fails",
   "type": "module",
   "main": "lib/index.js",

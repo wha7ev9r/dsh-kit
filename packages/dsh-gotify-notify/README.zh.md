@@ -18,7 +18,7 @@
 ## 安装
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.0
+dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.1
 ```
 
 本 bundle 自带 `gotify-notify` 行，无需再往 profile 组合里添加任何东西。
