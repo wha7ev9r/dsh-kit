@@ -6,6 +6,7 @@ All notable changes to this project are documented here.
 
 - Add `@wha7ever/dsh-gotify-notify`: Gotify push alerts on a harness question, an approval request, a finished turn, or a failed turn, with a settings page for the server, application credential, priority, title prefix, and per-trigger switches. The Host half reads its whole Config through `.volatile()` references, so a settings-page save reaches the next push without a reload, and it observes `user-questions/request` and `approval/request` with `{ prepend: true }` because an earlier answerer that claims the request would otherwise stop the waterfall before the observer runs.
 - Add a `gotify` choice to the publish workflow.
+- Resolve `@deepseek-ai/schemastery` through the harness loader's own bare specifier first. Inside Electron `import.meta.url` is not always a plain `file:` URL, so the previous `createRequire` anchor failed and the Gotify row announced no configuration schema. The status report now carries the module URL and each anchor's failure, so an unresolved schema needs no Host log.
 - Migrate the workspace from pnpm to Bun: `workspaces` in the root `package.json` replaces `pnpm-workspace.yaml`, `bun.lock` replaces `pnpm-lock.yaml`, and CI installs and validates with Bun.
 - Keep publishing on the npm CLI: `bun publish` supports neither `--provenance` nor npm Trusted Publishing (GitHub OIDC), so the release workflow installs with Bun and publishes with npm.
 - Pin the dependency audit to the official npm registry so a configured mirror cannot hide advisories.

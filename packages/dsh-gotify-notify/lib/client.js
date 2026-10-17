@@ -214,6 +214,13 @@ window.__ModuleLoader__.load({
       error: { color: 'var(--dsw-alias-state-error-primary)' },
       success: { color: 'var(--dsw-alias-state-success-primary)' },
       meta: { color: 'var(--dsw-alias-label-secondary)', fontSize: '11px', lineHeight: 1.6 },
+      diagnostics: {
+        marginTop: '6px',
+        fontFamily: 'var(--dsw-font-family-mono, monospace)',
+        fontSize: '11px',
+        wordBreak: 'break-all',
+        opacity: 0.85,
+      },
     };
 
     /**
@@ -466,6 +473,13 @@ window.__ModuleLoader__.load({
           children.push(h('div', { key: 'unavailable', style: styles.notice, role: 'status' },
             h('div', null, t('unavailable')),
             probe?.schemaAvailable === false ? h('div', null, t('unavailableSchema')) : null,
+            // The module URL and the per-anchor failures make one screenshot
+            // enough to place an unresolved schema, without a Host log.
+            probe?.schemaAvailable === false && probe?.schemaDiagnostics !== undefined
+              ? h('div', { style: styles.diagnostics },
+                `${probe.schemaDiagnostics.moduleUrl ?? '(no url)'} · ` +
+                (probe.schemaDiagnostics.attempts ?? []).map((attempt) => `${attempt.anchor}:${attempt.ok ? 'ok' : attempt.error}`).join(' | '))
+              : null,
             configurable ? null : h('div', null, t('unavailableRow')),
           ));
         }

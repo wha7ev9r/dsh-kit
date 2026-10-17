@@ -55,23 +55,52 @@ const MAX_MESSAGE_CHARS = 3500
  *
  * @returns The Schemastery namespace, or `undefined` when no harness is reachable.
  */
-function resolveSchemaLibrary() {
-  const anchors = [import.meta.url]
-  for (const dir of [process.env.DSH_PROFILE_DIR, process.env.DSH_HOME]) {
-    if (typeof dir === 'string' && dir.length > 0) anchors.push(pathToFileURL(join(dir, 'package.json')).href)
+async function resolveSchemaLibrary() {
+  const attempts = []
+  // Ask the harness loader first. It resolves a bare specifier for a
+  // profile-installed plugin exactly as it does for every shipped package, which
+  // is the only route that also works inside Electron, where `import.meta.url`
+  // is not necessarily a plain `file:` URL.
+  try {
+    const loaded = await import('@deepseek-ai/schemastery')
+    const candidate = loaded?.default ?? loaded
+    if (candidate !== undefined && candidate !== null) {
+      attempts.push({ anchor: 'import', ok: true })
+      return { library: candidate, attempts }
+    }
+    attempts.push({ anchor: 'import', ok: false, error: 'empty namespace' })
+  } catch (error) {
+    attempts.push({ anchor: 'import', ok: false, error: error?.code ?? String(error?.message ?? error) })
   }
-  for (const anchor of anchors) {
-    try {
-      const loaded = createRequire(anchor)('@deepseek-ai/schemastery')
-      if (loaded !== undefined && loaded !== null) return loaded
-    } catch {
-      // Try the next anchor: a repository checkout carries no harness packages.
+  const anchors = [['module', import.meta.url]]
+  for (const [label, dir] of [['profile', process.env.DSH_PROFILE_DIR], ['home', process.env.DSH_HOME]]) {
+    if (typeof dir === 'string' && dir.length > 0) {
+      try {
+        anchors.push([label, pathToFileURL(join(dir, 'package.json')).href])
+      } catch {
+        attempts.push({ anchor: label, ok: false, error: 'invalid path' })
+      }
     }
   }
-  return undefined
+  for (const [label, anchor] of anchors) {
+    try {
+      const loaded = createRequire(anchor)('@deepseek-ai/schemastery')
+      if (loaded !== undefined && loaded !== null) {
+        attempts.push({ anchor: label, ok: true })
+        return { library: loaded, attempts }
+      }
+      attempts.push({ anchor: label, ok: false, error: 'empty export' })
+    } catch (error) {
+      attempts.push({ anchor: label, ok: false, error: error?.code ?? String(error?.message ?? error) })
+    }
+  }
+  return { library: undefined, attempts }
 }
 
-const z = resolveSchemaLibrary()
+const resolvedSchema = await resolveSchemaLibrary()
+const z = resolvedSchema.library
+/** Why the settings schema is missing, for the status report. */
+const schemaDiagnostics = { moduleUrl: import.meta.url, attempts: resolvedSchema.attempts }
 //#endregion
 
 //#region Config
@@ -563,6 +592,7 @@ function statusOf(ctx, config, gateway) {
   }
   return {
     schemaAvailable: z !== undefined,
+    schemaDiagnostics,
     configurable,
     enabled: settings.enabled,
     configured: messageEndpoint(settings.serverUrl) !== undefined && settings.appToken !== '',
