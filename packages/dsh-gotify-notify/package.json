@@ -1,6 +1,6 @@
 {
   "name": "@wha7ever/dsh-gotify-notify",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Gotify push alerts for DeepSeek Harness: get pinged when the harness asks you a question, waits for an approval, finishes a turn, or fails",
   "type": "module",
   "main": "lib/index.js",
@@ -53,10 +53,13 @@
       ]
     }
   },
+  "engines": {
+    "dsh": ">=0.2.0-rc.1"
+  },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "^4.0.0 || ^4.0.5-alpha.1 || ^5.0.0-0 || >=6.0.0",
-    "@deepseek-ai/dsh-settings": "^0.2.0-rc.1 || ^0.2.1-alpha.1 || ^0.3.0-0 || ^0.4.0-0 || >=0.5.0",
-    "@deepseek-ai/schemastery": "^3.18.0 || ^3.18.5-alpha.1 || ^4.0.0-0 || >=5.0.0"
+    "@deepseek-ai/cordis": ">=4.0.0",
+    "@deepseek-ai/dsh-settings": ">=0.2.0-rc.1",
+    "@deepseek-ai/schemastery": ">=3.18.0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-settings": {

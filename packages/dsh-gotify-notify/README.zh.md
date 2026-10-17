@@ -18,10 +18,12 @@
 ## 安装
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.2
+dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.3
 ```
 
 本 bundle 自带 `gotify-notify` 行，无需再往 profile 组合里添加任何东西。
+
+它声明 `engines.dsh: ">=0.2.0-rc.1"` —— 一个**无上界**范围：此后每个宿主版本都能直接加载，不需要插件跟着更新，因为本插件只用到 `settings` 服务与提问 / 批准 / 代理状态 / 代理出错这几个事件。
 
 ## 配置
 

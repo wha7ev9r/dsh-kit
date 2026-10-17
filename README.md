@@ -17,7 +17,7 @@ All packages are ordinary DSH bundles. After publication, install the exact vers
 dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-web-search-anysearch@0.2.0
-dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.2
+dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.3
 
 # The Host tools are useful in a headless profile too; the browser panel is not mounted there.
 dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.1

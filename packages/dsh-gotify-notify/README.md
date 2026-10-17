@@ -18,10 +18,12 @@ A session that continues by itself does not ping you per round. The completion p
 ## Install
 
 ```powershell
-dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.2
+dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.3
 ```
 
 The bundle inserts its own `gotify-notify` row, so nothing else has to be added to the profile composition.
+
+It declares `engines.dsh: ">=0.2.0-rc.1"`, an open-ended range: every later host line loads without a plugin update, because this plugin only uses the `settings` service and the question, approval, agent-status, and agent-error events.
 
 ## Configure
 
