@@ -12,6 +12,7 @@ on:
           - theme
           - console
           - anysearch
+          - gotify
 
 permissions:
   contents: read
@@ -55,4 +56,7 @@ jobs:
           if [ "${{ inputs.package }}" = "anysearch" ]; then
             bun run --filter @wha7ever/dsh-web-search-anysearch build
             (cd packages/dsh-web-search-anysearch && npm publish --registry=https://registry.npmjs.org --access public --provenance)
+          fi
+          if [ "${{ inputs.package }}" = "gotify" ]; then
+            (cd packages/dsh-gotify-notify && npm publish --registry=https://registry.npmjs.org --access public --provenance)
           fi

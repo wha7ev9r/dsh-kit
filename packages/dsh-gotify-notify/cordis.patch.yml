@@ -1,0 +1,5 @@
+# Bundle patch: the package owns this row so a profile only needs to select the bundle.
+# Every field of the row's Config is volatile, so the settings page edits it live.
+- insert:
+    - id: gotify-notify
+      name: '@wha7ever/dsh-gotify-notify'

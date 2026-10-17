@@ -9,6 +9,19 @@
       "name": "@wha7ever/dsh-firefly-theme",
       "version": "0.1.1",
     },
+    "packages/dsh-gotify-notify": {
+      "name": "@wha7ever/dsh-gotify-notify",
+      "version": "0.1.0",
+      "peerDependencies": {
+        "@deepseek-ai/cordis": "~4.0.4",
+        "@deepseek-ai/dsh-settings": "0.2.0-rc.2",
+        "@deepseek-ai/schemastery": "~3.18.4",
+      },
+      "optionalPeers": [
+        "@deepseek-ai/dsh-settings",
+        "@deepseek-ai/schemastery",
+      ],
+    },
     "packages/dsh-mcp-console": {
       "name": "@wha7ever/dsh-mcp-console",
       "version": "0.1.1",
@@ -156,6 +169,8 @@
     "@vitest/utils": ["@vitest/utils@4.1.11", "https://registry.npmmirror.com/@vitest/utils/-/utils-4.1.11.tgz", { "dependencies": { "@vitest/pretty-format": "4.1.11", "convert-source-map": "2.0.0", "tinyrainbow": "3.1.1" } }, "sha512-zTCVGpyFsGWBhllOyKlTw/vnr6D9qxsfSDyfbyZmTyjHw5N/VuvzHpHoQjm2ZJzn4RJgx5w4r7V0er69CmLgPQ=="],
 
     "@wha7ever/dsh-firefly-theme": ["@wha7ever/dsh-firefly-theme@workspace:packages/dsh-firefly-theme"],
+
+    "@wha7ever/dsh-gotify-notify": ["@wha7ever/dsh-gotify-notify@workspace:packages/dsh-gotify-notify"],
 
     "@wha7ever/dsh-mcp-console": ["@wha7ever/dsh-mcp-console@workspace:packages/dsh-mcp-console"],
 

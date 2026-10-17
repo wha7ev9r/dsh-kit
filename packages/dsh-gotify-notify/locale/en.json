@@ -1,0 +1,4 @@
+{
+  "title": "Gotify Alerts",
+  "description": "Push a Gotify notification when the harness asks you a question, needs an approval, finishes a turn, or fails."
+}

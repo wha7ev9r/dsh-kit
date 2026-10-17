@@ -9,6 +9,7 @@
 | [`@wha7ever/dsh-firefly-theme`](packages/dsh-firefly-theme) | Client | Firefly-inspired light/dark token theme for the DSH Web UI. |
 | [`@wha7ever/dsh-mcp-console`](packages/dsh-mcp-console) | Host + Client | A settings panel for inspecting and enabling/disabling MCP rows, plus the `mcp_status` and `mcp_toggle` model tools. |
 | [`@wha7ever/dsh-web-search-anysearch`](packages/dsh-web-search-anysearch) | Host | Community fork of `@anysearch/anysearch-dsh` kept installable on DSH 0.1.7/0.2: AnySearch web search and fetch providers plus the `anysearch_*` tools. |
+| [`@wha7ever/dsh-gotify-notify`](packages/dsh-gotify-notify) | Host + Client | Gotify push alerts when the harness asks a question, waits for an approval, finishes a turn, or fails, with a settings page for the server, credential, priority, and triggers. |
 
 All packages are ordinary DSH bundles. After publication, install the exact version that matches the compatibility baseline:
 
@@ -16,6 +17,7 @@ All packages are ordinary DSH bundles. After publication, install the exact vers
 dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-web-search-anysearch@0.2.0
+dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.0
 
 # The Host tools are useful in a headless profile too; the browser panel is not mounted there.
 dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.1
