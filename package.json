@@ -8,6 +8,7 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "check": "bun scripts/check-workspace.mjs",
+    "test:updates": "bun packages/dsh-plugin-updates/test/semver.test.mjs && bun packages/dsh-plugin-updates/test/sources.test.mjs && bun packages/dsh-plugin-updates/test/host.test.mjs && bun packages/dsh-plugin-updates/test/client.test.mjs",
     "audit": "BUN_CONFIG_REGISTRY=https://registry.npmjs.org bun audit --audit-level=high"
   },
   "engines": {

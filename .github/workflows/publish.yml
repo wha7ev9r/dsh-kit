@@ -13,6 +13,7 @@ on:
           - console
           - anysearch
           - gotify
+          - updates
 
 permissions:
   contents: read
@@ -59,4 +60,7 @@ jobs:
           fi
           if [ "${{ inputs.package }}" = "gotify" ]; then
             (cd packages/dsh-gotify-notify && npm publish --registry=https://registry.npmjs.org --access public --provenance)
+          fi
+          if [ "${{ inputs.package }}" = "updates" ]; then
+            (cd packages/dsh-plugin-updates && npm publish --registry=https://registry.npmjs.org --access public --provenance)
           fi

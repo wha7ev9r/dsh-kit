@@ -10,6 +10,7 @@
 | [`@wha7ever/dsh-mcp-console`](packages/dsh-mcp-console) | Host + Client | A settings panel for inspecting and enabling/disabling MCP rows, plus the `mcp_status` and `mcp_toggle` model tools. |
 | [`@wha7ever/dsh-web-search-anysearch`](packages/dsh-web-search-anysearch) | Host | Community fork of `@anysearch/anysearch-dsh` kept installable on DSH 0.1.7/0.2: AnySearch web search and fetch providers plus the `anysearch_*` tools. |
 | [`@wha7ever/dsh-gotify-notify`](packages/dsh-gotify-notify) | Host + Client | Gotify push alerts when the harness asks a question, waits for an approval, finishes a turn, or fails, with a settings page for the server, credential, priority, and triggers. |
+| [`@wha7ever/dsh-plugin-updates`](packages/dsh-plugin-updates) | Host + Client | Lazy update checks for installed third-party and official plugins, reported on the Plugins page with a copyable upgrade command. Read-only: it never installs or removes a package. |
 
 All packages are ordinary DSH bundles. After publication, install the exact version that matches the compatibility baseline:
 
@@ -18,9 +19,18 @@ dsh plugin --profile web add @wha7ever/dsh-firefly-theme@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-mcp-console@0.1.1
 dsh plugin --profile web add @wha7ever/dsh-web-search-anysearch@0.2.0
 dsh plugin --profile web add @wha7ever/dsh-gotify-notify@0.1.3
+dsh plugin --profile web add @wha7ever/dsh-plugin-updates@latest
 
 # The Host tools are useful in a headless profile too; the browser panel is not mounted there.
 dsh plugin --profile headless add @wha7ever/dsh-mcp-console@0.1.1
+```
+
+The update checker is installed from `latest` on purpose: it has no peer chain and its `engines.dsh` bound is open, so a new release does not need a compatibility edit. It also compares against the `latest` tag when a profile records an exact version, so even a pinned install receives the reminder. The other packages keep exact versions.
+
+The update checker has no build step, runtime dependencies, or peer dependencies; a monorepo subdirectory install works too:
+
+```powershell
+dsh plugin --profile web add "github:wha7ev9r/dsh-kit#path:packages/dsh-plugin-updates"
 ```
 
 Do not install the AnySearch fork alongside the upstream `@anysearch/anysearch-dsh`; both register the same `anysearch` web provider id.
@@ -81,7 +91,7 @@ A `link:` installation is a development convenience. Once a version is published
 The repository includes a manual GitHub Actions publish workflow. After the one-time first release, configure each package's npm Trusted Publisher to allow `wha7ev9r/dsh-kit` and workflow `publish.yml`; the workflow then uses GitHub OIDC and no npm token. Trigger it from the Actions tab or with:
 
 ```powershell
-# `both` publishes theme + console; pass anysearch, theme, or console to publish a single package.
+# `both` publishes theme + console; pass anysearch, gotify, updates, theme, or console to publish a single package.
 gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=both
 gh workflow run publish.yml --repo wha7ev9r/dsh-kit -f package=anysearch
 ```

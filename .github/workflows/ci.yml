@@ -22,6 +22,8 @@ jobs:
         run: bun install --frozen-lockfile --ignore-scripts
       - name: Validate package sources
         run: bun run check
+      - name: Test the plugin update checker
+        run: bun run test:updates
       - name: Build and test the AnySearch plugin package
         run: bun run --filter @wha7ever/dsh-web-search-anysearch check
       - name: Audit npm dependencies

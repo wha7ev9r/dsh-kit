@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Plugin updates",
+    "description": "Checks installed plugins for newer npm or GitHub versions and shows the available updates on the Plugins page."
+  }
+}
