@@ -4,12 +4,17 @@
   "private": true,
   "description": "A public monorepo for wha7ev9r's DeepSeek Harness plugins and themes",
   "type": "module",
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["packages/*"],
   "scripts": {
-    "check": "node scripts/check-workspace.mjs",
-    "audit": "pnpm audit --registry=https://registry.npmjs.org --audit-level=high"
+    "check": "bun scripts/check-workspace.mjs",
+    "audit": "BUN_CONFIG_REGISTRY=https://registry.npmjs.org bun audit --audit-level=high"
   },
   "engines": {
-    "node": ">=20.11.0"
+    "bun": ">=1.4.2",
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "overrides": {
+    "source-map-js": "^1.2.2"
   }
 }
