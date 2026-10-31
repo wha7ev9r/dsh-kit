@@ -6,14 +6,14 @@ These packages use DSH bundle and client contracts that are still evolving. They
 
 | Item | Value |
 | --- | --- |
-| DSH package inspected locally | `@deepseek-ai/dsh@0.2.1-rc.2` |
-| Verification date | 2026-10-18 |
-| Runtime used for local inspection | `Bun 1.4.2` |
+| DSH package inspected locally | `@deepseek-ai/dsh@0.2.1-rc.5` |
+| Verification date | 2026-10-31 |
+| Runtime used for local inspection | `Bun 1.4.4` |
 | Package manager | `bun@1.4.2` |
 
-The baseline was checked against the installed DSH package and the live Host/Client inspection providers. The published `0.1.1` packages were installed into both local profiles through npm; the web/headless package manifests and locks contain exact versions, the composed rows resolve to `@wha7ever/*`, and the live `settings.section` slot reports `mcp-servers` active. A newly created Agent is required to observe the Host tool registry after a live profile reload.
+The 2026-10-31 row re-inspected the installed `0.2.1-rc.5` package and its live Host/Client inspection providers; the install checks in the paragraphs below were made against earlier baselines and keep their own dates. The published `0.1.1` packages were installed into both local profiles through npm; the web/headless package manifests and locks contain exact versions, the composed rows resolve to `@wha7ever/*`, and the live `settings.section` slot reports `mcp-servers` active. A newly created Agent is required to observe the Host tool registry after a live profile reload.
 
-The `0.2.1-rc.2` check also mounted `@wha7ever/dsh-plugin-updates` in the `desktop` profile. The live `plugins.tab` slot reports the `updates` occupant at order `-10`; the tab shows the seven published third-party plugins and the official `0.2.1-rc.2` line as current. The updater was then replaced with the GitHub install `github:wha7ev9r/dsh-kit#path:packages/dsh-plugin-updates`: the profile records that spec, the bundle detail page renders the package title, description, and icon, and the update section reports current `0.1.0` → latest `0.1.0` from `github-raw` with no available update. The source fallback and stale-report paths are covered by the package's offline tests rather than by a second live network setup.
+The `0.2.1-rc.2` check (2026-10-18) also mounted `@wha7ever/dsh-plugin-updates` in the `desktop` profile. The live `plugins.tab` slot reports the `updates` occupant at order `-10`; the tab shows the seven published third-party plugins and the official `0.2.1-rc.2` line as current. The updater was then replaced with the GitHub install `github:wha7ev9r/dsh-kit#path:packages/dsh-plugin-updates`: the profile records that spec, the bundle detail page renders the package title, description, and icon, and the update section reports current `0.1.0` → latest `0.1.0` from `github-raw` with no available update. The source fallback and stale-report paths are covered by the package's offline tests rather than by a second live network setup.
 
 ## Plugin updates
 
@@ -44,7 +44,10 @@ The `0.2.1-rc.2` check also mounted `@wha7ever/dsh-plugin-updates` in the `deskt
 - The settings panel contributes to the additive `settings.section` slot with id `mcp-servers`.
 - The AnySearch fork registers `ctx.web` search and fetch providers (id `anysearch`), resolves credentials through `ctx.credentials.resolve()`, and registers its advanced tools through `ctx.tools.register(defineTool(...))`, declaring `inject: ['web', 'credentials', 'systemPrompt', 'tools']`.
 - The update checker uses `pluginManager.listBundles()`/`registries()`, the `plugin-manager/changed` event, the authenticated Connection `/api` route, the additive `plugins.tab` slot (id `updates`), `plugins.detail.badge`, and `plugins.detail.section`.
+- The r4 usage dashboard resolves its key with `ctx.credentials.resolve()`, stores a new one with `ctx.credentials.set()`, reads the documented r4 `/v1/cli/key`, `/v1/cli/usage`, and `/v1/cli/meta` endpoints from the Host, and answers the browser on the authenticated Connection `/api` fetch route. It is **designed** to contribute the additive `conversation.composer.dock` entry with id `r4-usage` at order `2`; it was not installed in any profile when this line was written, so the live occupant is still unverified — replace this note after a real profile check.
 
 ## Upgrade policy
 
 Before changing the DSH version, copy the active profile files to a temporary backup, test the new DSH version in a separate `$DSH_HOME`, then update this file only after the package rows load and the settings page renders. Do not use `@latest` or another floating dist-tag for the plugins, with one exception: `@wha7ever/dsh-plugin-updates` is installed from `latest` or Git on purpose. It has no peer chain and an open `engines.dsh` bound, and it must be able to report its own updates; the other packages keep exact versions.
+
+`@wha7ever/dsh-r4-usage` is distributed from Git and declares no `engines` and no peer dependencies at all, so no version range in the package can refuse to load it on a future host; a changed contract surfaces as an error inside its card instead.

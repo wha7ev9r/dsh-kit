@@ -7,7 +7,7 @@
     },
     "packages/dsh-firefly-theme": {
       "name": "@wha7ever/dsh-firefly-theme",
-      "version": "0.1.1",
+      "version": "0.1.2",
     },
     "packages/dsh-gotify-notify": {
       "name": "@wha7ever/dsh-gotify-notify",
@@ -28,6 +28,10 @@
     },
     "packages/dsh-plugin-updates": {
       "name": "@wha7ever/dsh-plugin-updates",
+      "version": "0.1.0",
+    },
+    "packages/dsh-r4-usage": {
+      "name": "@wha7ever/dsh-r4-usage",
       "version": "0.1.0",
     },
     "packages/dsh-web-search-anysearch": {
@@ -179,6 +183,8 @@
     "@wha7ever/dsh-mcp-console": ["@wha7ever/dsh-mcp-console@workspace:packages/dsh-mcp-console"],
 
     "@wha7ever/dsh-plugin-updates": ["@wha7ever/dsh-plugin-updates@workspace:packages/dsh-plugin-updates"],
+
+    "@wha7ever/dsh-r4-usage": ["@wha7ever/dsh-r4-usage@workspace:packages/dsh-r4-usage"],
 
     "@wha7ever/dsh-web-search-anysearch": ["@wha7ever/dsh-web-search-anysearch@workspace:packages/dsh-web-search-anysearch"],
 

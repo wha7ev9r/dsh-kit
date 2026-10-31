@@ -24,6 +24,8 @@ jobs:
         run: bun run check
       - name: Test the plugin update checker
         run: bun run test:updates
+      - name: Test the r4 usage dashboard
+        run: bun run test:r4-usage
       - name: Build and test the AnySearch plugin package
         run: bun run --filter @wha7ever/dsh-web-search-anysearch check
       - name: Audit npm dependencies

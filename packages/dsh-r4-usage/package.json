@@ -1,0 +1,61 @@
+{
+  "name": "@wha7ever/dsh-r4-usage",
+  "version": "0.1.0",
+  "description": "r4 usage dashboard for DeepSeek Harness: a composer-dock pill and detail card with plan, spend-window, and API-key progress bars",
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "bun test/usage.test.mjs"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "locale",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wha7ev9r/dsh-kit.git",
+    "directory": "packages/dsh-r4-usage"
+  },
+  "bugs": {
+    "url": "https://github.com/wha7ev9r/dsh-kit/issues"
+  },
+  "homepage": "https://github.com/wha7ev9r/dsh-kit/tree/main/packages/dsh-r4-usage#readme",
+  "icon": "./icon.svg",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "r4",
+    "usage",
+    "quota"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT"
+}

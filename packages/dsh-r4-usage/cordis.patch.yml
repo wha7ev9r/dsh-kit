@@ -1,0 +1,6 @@
+# Bundle patch: the package owns this row so a profile only needs to select the bundle.
+# No config here on purpose — the defaults live in lib/index.js, and a profile
+# that wants other values overrides this same id with a complete config object.
+- insert:
+    - id: r4-usage
+      name: '@wha7ever/dsh-r4-usage'
