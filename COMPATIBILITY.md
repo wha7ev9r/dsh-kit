@@ -44,7 +44,7 @@ The `0.2.1-rc.2` check (2026-10-18) also mounted `@wha7ever/dsh-plugin-updates` 
 - The settings panel contributes to the additive `settings.section` slot with id `mcp-servers`.
 - The AnySearch fork registers `ctx.web` search and fetch providers (id `anysearch`), resolves credentials through `ctx.credentials.resolve()`, and registers its advanced tools through `ctx.tools.register(defineTool(...))`, declaring `inject: ['web', 'credentials', 'systemPrompt', 'tools']`.
 - The update checker uses `pluginManager.listBundles()`/`registries()`, the `plugin-manager/changed` event, the authenticated Connection `/api` route, the additive `plugins.tab` slot (id `updates`), `plugins.detail.badge`, and `plugins.detail.section`.
-- The r4 usage dashboard resolves its key with `ctx.credentials.resolve()`, stores a new one with `ctx.credentials.set()`, reads the documented r4 `/v1/cli/key`, `/v1/cli/usage`, and `/v1/cli/meta` endpoints from the Host, and answers the browser on the authenticated Connection `/api` fetch route. It contributes a `r4-usage` entry to the additive `shell.overlay` slot (order `10`), collapsed to a right-edge rail; the live occupant of that slot was not re-inspected at this commit — see the verified baseline note.
+- The r4 usage dashboard resolves its key with `ctx.credentials.resolve()`, stores a new one with `ctx.credentials.set()`, reads the documented r4 `/v1/cli/key`, `/v1/cli/usage`, and `/v1/cli/meta` endpoints from the Host, and answers the browser on the authenticated Connection `/api` fetch route. It contributes a `r4-usage` entry to the additive `shell.overlay` slot; the live `desktop` profile reports that occupant at order `10` on 2026-10-31, and `conversation.composer.dock` no longer lists it.
 
 ## Upgrade policy
 
