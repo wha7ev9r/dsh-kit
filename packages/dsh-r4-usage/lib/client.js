@@ -15,7 +15,7 @@ window.__ModuleLoader__.load({
 
     const en = {
       loading: 'Loading',
-      notConfigured: 'r4 not configured · click to set up',
+      notConfigured: 'r4 not set',
       plan: 'Plan',
       keyLimit: 'Key limit',
       wallet: 'Wallet',
@@ -79,7 +79,7 @@ window.__ModuleLoader__.load({
     };
     const zh = {
       loading: '加载中',
-      notConfigured: 'r4 未配置 · 点击设置',
+      notConfigured: 'r4 未配置',
       plan: '套餐',
       keyLimit: '限额',
       wallet: '钱包',
@@ -169,21 +169,21 @@ window.__ModuleLoader__.load({
     };
 
     const CSS = `
-.r4u-root { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.45; }
-.r4u-pill { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; height: 22px; padding: 0 10px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: inherit; font: inherit; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-.r4u-pill:hover { background: var(--dsw-alias-bg-layer-2); border-color: var(--dsw-alias-border-l1); }
+.r4u-root { position: relative; display: flex; flex-direction: column; align-items: flex-end; align-self: flex-end; margin-left: auto; gap: 6px; width: auto; max-width: 100%; color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.45; }
+.r4u-pill { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; height: 24px; padding: 0 9px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 10px; background: var(--dsw-alias-bg-layer-2); color: inherit; font: inherit; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.r4u-pill:hover { background: var(--dsw-alias-bg-overlay); border-color: var(--dsw-alias-border-l2); }
 .r4u-pill:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 1px; }
 .r4u-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
 .r4u-pill-label { white-space: nowrap; }
 .r4u-pill-value { color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .r4u-pill-meta { white-space: nowrap; }
 .r4u-pill-percent { color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.r4u-pill-bar { display: inline-flex; width: 64px; flex: none; }
+.r4u-pill-bar { display: inline-flex; width: 48px; flex: none; }
 .r4u-chevron { font-size: 9px; transition: transform .18s ease; }
 .r4u-chevron-open { transform: rotate(180deg); }
-.r4u-expand { width: 100%; animation: r4u-in .18s ease; }
+.r4u-expand { width: min(340px, 100%); animation: r4u-in .18s ease; }
 @keyframes r4u-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.r4u-card { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; margin-bottom: 4px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; background: var(--dsw-alias-bg-layer-2); color: var(--dsw-alias-label-primary); font-size: 12px; text-align: left; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; }
+.r4u-card { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; background: var(--dsw-alias-bg-layer-2); color: var(--dsw-alias-label-primary); font-size: 12px; text-align: left; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; }
 .r4u-identity { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .r4u-name { font-size: 13px; color: var(--dsw-alias-label-primary); }
 .r4u-dim { color: var(--dsw-alias-label-secondary); font-size: 11px; }
@@ -750,13 +750,20 @@ window.__ModuleLoader__.load({
               ? null
               : h('span', { className: 'r4u-pill-bar', 'aria-hidden': true }, h(Bar, { value: view.ratio, tone, label: view.label, height: 4 })),
             view.text ? h('span', { className: 'r4u-pill-value' }, view.text) : null,
-            todayUsd === null || todayUsd === undefined ? null : h('span', { className: 'r4u-pill-meta' }, `${t('today')} ${money(todayUsd)}`),
             h('span', { className: 'r4u-chevron' + (expanded ? ' r4u-chevron-open' : ''), 'aria-hidden': true }, '▾'),
           ),
           expanded && snapshot
             ? h(
                 'div',
-                { className: 'r4u-expand' },
+                {
+                  className: 'r4u-expand',
+                  onKeyDown: (event) => {
+                    if (event.key === 'Escape') {
+                      event.preventDefault();
+                      setExpanded(false);
+                    }
+                  },
+                },
                 h(Detail, {
                   snapshot,
                   busy: data.busy,

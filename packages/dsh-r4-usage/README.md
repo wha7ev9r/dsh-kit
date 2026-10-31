@@ -1,6 +1,6 @@
 # @wha7ever/dsh-r4-usage
 
-An r4 usage dashboard for DeepSeek Harness. It adds one ambient pill under the message composer and an expandable detail card: plan budget, every spend window, the API key's own limit, today's requests and tokens, the last seven days of charges, and the per-model split — each budget as a progress bar with the remaining share.
+An r4 usage dashboard for DeepSeek Harness. It pins one small card to the right edge of the composer dock — collapsed to a single line — and expands it into a detail panel: plan budget, every spend window, the API key's own limit, today's requests and tokens, the last seven days of charges, and the per-model split, each budget as a progress bar with the remaining share.
 
 The numbers come from the documented read-only `/v1/cli` endpoints of the r4 API:
 
@@ -50,6 +50,7 @@ The key is entered in the expanded card and written through `ctx.credentials.set
 
 ## Behaviour
 
+- Collapsed by default: the card shows the label, the used share, a mini bar, and the remaining budget. Expanding opens a 340 px panel to the left of that edge, capped at 320 px with its own scroll, so it never covers the shipped composer data; Escape collapses it.
 - Polls at the Host's `refreshMs` (60 s by default) while mounted, plus one forced read when Refresh is pressed (minimum 5 s between forced reads). The host caches one snapshot and de-duplicates concurrent reads, so several sessions share one read instead of polling independently.
 - The seven-day series is padded to seven buckets from its last day (or the response's `day`), so a short or missing response still draws a full week.
 - A failed refresh keeps the last good numbers and shows the failure on the card, so a temporary outage does not blank the pill.
