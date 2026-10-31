@@ -109,7 +109,7 @@ npx -y @deepseek-ai/dsh plugin --profile web remove @wha7ever/dsh-web-search-any
 
 ## Compatibility and limitations
 
-- DSH peer range: `>=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0` for the `@deepseek-ai/dsh-*` services this plugin consumes. Validated against DSH `0.1.7-rc.2` and `0.2.0-rc.2`; every plugin-facing DSH package is byte-identical between those releases.
+- DSH peer range: `>=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0` for the `@deepseek-ai/dsh-*` services this plugin consumes. Validated against DSH `0.1.7-rc.2`, `0.2.0-rc.2`, and `0.2.1-rc.5`: on 0.2.1 the native `web_search` takes a `queries[]` list while the provider still answers one query per request, and the smoke covers that multi-query path plus the separate `web_fetch` tool.
 - DeepSeek Harness is in developer preview and may make compatibility-breaking changes.
 - URL extraction is exposed through Harness's provider-neutral `web_fetch`; the plugin does not add a duplicate `anysearch_extract` tool.
 - Configure the API key through DSH-managed credentials or an environment variable; the DSH settings page does not currently provide a third-party Provider credential field.

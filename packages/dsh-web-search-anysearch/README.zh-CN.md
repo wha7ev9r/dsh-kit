@@ -109,7 +109,7 @@ npx -y @deepseek-ai/dsh plugin --profile web remove @wha7ever/dsh-web-search-any
 
 ## 兼容性与限制
 
-- DSH peer 范围：本插件消费的 `@deepseek-ai/dsh-*` 服务声明为 `>=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0`。已在 DSH `0.1.7-rc.2` 与 `0.2.0-rc.2` 上验证；这两个版本之间所有插件可见的 DSH 包逐字节相同。
+- DSH peer 范围：本插件消费的 `@deepseek-ai/dsh-*` 服务声明为 `>=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0`。已在 DSH `0.1.7-rc.2`、`0.2.0-rc.2` 与 `0.2.1-rc.5` 上验证：0.2.1 的原生 `web_search` 接受 `queries[]` 列表，Provider 仍按单条 query 作答，smoke 覆盖了这条多查询路径与独立的 `web_fetch` 工具。
 - DeepSeek Harness 仍处于开发预览阶段，可能发布不兼容变更。
 - 网页提取通过 Harness 原生 `web_fetch` 暴露；插件不会再增加一个重复的 `anysearch_extract` 工具。
 - 请通过 DSH 管理的凭据文件或环境变量配置 API Key；DSH 设置页当前不提供第三方 Provider 凭据输入项。

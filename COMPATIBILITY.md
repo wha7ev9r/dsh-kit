@@ -33,6 +33,7 @@ The `0.2.1-rc.2` check (2026-10-18) also mounted `@wha7ever/dsh-plugin-updates` 
 
 - Peer range: `>=0.1.7-rc.2 <0.2.0-0 || >=0.2.0-rc.1 <0.3.0-0` for `dsh-web`, `dsh-tools`, `dsh-tool-web`, `dsh-credentials`, and `dsh-system-prompt` (two segments so pre-release hosts like `0.2.0-rc.2` also satisfy npm's default, non-`includePrerelease` peer check).
 - Evidence: every plugin-facing package (`dsh-web`, `dsh-tools`, `dsh-tool-web`, `dsh-credentials`, `dsh-system-prompt`, plus `cordis@4.0.4` and `schemastery@3.18.4`) is byte-identical between `0.1.7-rc.2` and `0.2.0-rc.2`; `defineTool`, `ctx.tools.register`, `ctx.web.registerSearchProvider`/`registerFetchProvider`, and `ctx.credentials.resolve` signatures are unchanged across the two releases.
+- DSH `0.2.1-rc.5` splits the model-facing web tools into `web_search` (a `queries[]` list) and `web_fetch`. The provider seam is unchanged, so the package typechecks against the 0.2.1 types and its smoke passes on a Linux server: `web_search`, `web_fetch`, `anysearch_search`, `anysearch_batch_search`, and `anysearch_capabilities` are all registered, credentials resolve per call, an existing native `web_fetch` is reused instead of duplicated, and the multi-query search path is answered by the AnySearch provider. The smoke's `applyWebSearchTool` call now passes `(maxResults, maxQueries, timeoutMs, fetchEnabled)` in the current order.
 - Run `bun run --filter @wha7ever/dsh-web-search-anysearch test:compat` to re-verify the declared matrix against published DSH versions.
 
 ## Contracts used
