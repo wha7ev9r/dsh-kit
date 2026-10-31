@@ -8,8 +8,8 @@ window.__ModuleLoader__.load({
     const h = React.createElement;
 
     const NS = 'wha7ev9r.r4Usage';
-    const DOCK_SLOT = 'conversation.composer.dock';
-    const DOCK_ID = 'r4-usage';
+    const OVERLAY_SLOT = 'shell.overlay';
+    const OVERLAY_ID = 'r4-usage';
     /** Only used until the first snapshot carries the Host's own interval. */
     const FALLBACK_POLL_MS = 60000;
 
@@ -47,6 +47,7 @@ window.__ModuleLoader__.load({
       noData: 'No data yet',
       expand: 'Show r4 usage details',
       collapse: 'Hide r4 usage details',
+      railLabel: 'r4 usage',
       refresh: 'Refresh',
       refreshing: 'Refreshing',
       updated: 'updated',
@@ -111,6 +112,7 @@ window.__ModuleLoader__.load({
       noData: '暂无数据',
       expand: '展开 r4 用量详情',
       collapse: '收起 r4 用量详情',
+      railLabel: 'r4 用量',
       refresh: '刷新',
       refreshing: '刷新中',
       updated: '更新于',
@@ -169,21 +171,17 @@ window.__ModuleLoader__.load({
     };
 
     const CSS = `
-.r4u-root { position: relative; display: flex; flex-direction: column; align-items: flex-end; align-self: flex-end; margin-left: auto; gap: 6px; width: auto; max-width: 100%; color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.45; }
-.r4u-pill { display: inline-flex; align-items: center; gap: 7px; max-width: 100%; height: 24px; padding: 0 9px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 10px; background: var(--dsw-alias-bg-layer-2); color: inherit; font: inherit; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-.r4u-pill:hover { background: var(--dsw-alias-bg-overlay); border-color: var(--dsw-alias-border-l2); }
-.r4u-pill:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 1px; }
+.r4u-drawer { position: fixed; right: 12px; top: 84px; z-index: 40; display: flex; flex-direction: row; align-items: flex-start; gap: 8px; pointer-events: auto; color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.45; }
+.r4u-rail { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; width: 30px; padding: 10px 4px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 10px; background: var(--dsw-alias-bg-layer-2); color: inherit; font: inherit; font-size: 11px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.r4u-rail:hover { background: var(--dsw-alias-bg-overlay); border-color: var(--dsw-alias-border-l2); }
+.r4u-rail:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 1px; }
 .r4u-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
-.r4u-pill-label { white-space: nowrap; }
-.r4u-pill-value { color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.r4u-pill-meta { white-space: nowrap; }
-.r4u-pill-percent { color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.r4u-pill-bar { display: inline-flex; width: 48px; flex: none; }
-.r4u-chevron { font-size: 9px; transition: transform .18s ease; }
-.r4u-chevron-open { transform: rotate(180deg); }
-.r4u-expand { width: min(340px, 100%); animation: r4u-in .18s ease; }
-@keyframes r4u-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.r4u-card { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; background: var(--dsw-alias-bg-layer-2); color: var(--dsw-alias-label-primary); font-size: 12px; text-align: left; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; }
+.r4u-rail-text { writing-mode: vertical-rl; white-space: nowrap; letter-spacing: .4px; }
+.r4u-rail-value { writing-mode: vertical-rl; white-space: nowrap; color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; }
+.r4u-rail-chevron { font-size: 10px; }
+.r4u-panel { width: min(300px, 84vw); animation: r4u-out .18s ease; }
+@keyframes r4u-out { from { opacity: 0; transform: translateX(6px); } to { opacity: 1; transform: none; } }
+.r4u-card { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 12px; background: var(--dsw-alias-bg-layer-2); color: var(--dsw-alias-label-primary); font-size: 12px; text-align: left; max-height: min(70vh, 560px); overflow-y: auto; overscroll-behavior: contain; }
 .r4u-identity { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .r4u-name { font-size: 13px; color: var(--dsw-alias-label-primary); }
 .r4u-dim { color: var(--dsw-alias-label-secondary); font-size: 11px; }
@@ -216,7 +214,7 @@ window.__ModuleLoader__.load({
 .r4u-key-form { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; border-top: 1px solid var(--dsw-alias-border-l1); }
 .r4u-error { color: var(--dsw-alias-state-error-primary); font-size: 11px; }
 .r4u-errors { display: flex; flex-direction: column; gap: 2px; }
-@media (prefers-reduced-motion: reduce) { .r4u-pill, .r4u-chevron, .r4u-expand, .r4u-bar-fill, .r4u-spark-fill { transition: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .r4u-rail, .r4u-panel, .r4u-bar-fill, .r4u-spark-fill { transition: none !important; animation: none !important; } }
 `;
 
     //#region Formatting
@@ -689,7 +687,7 @@ window.__ModuleLoader__.load({
         return h('div', { className: 'r4u-card' }, blocks);
       }
 
-      function UsageCard() {
+      function UsageDrawer() {
         useLocaleRevision();
         const data = useUsageData();
         const [expanded, setExpanded] = React.useState(false);
@@ -697,13 +695,14 @@ window.__ModuleLoader__.load({
         const [saving, setSaving] = React.useState(false);
         const [saveError, setSaveError] = React.useState(null);
         const [keyForm, setKeyForm] = React.useState(false);
+        const panelId = React.useId();
 
         const snapshot = data.data;
         const view = headline(snapshot, t);
         const failure = snapshot?.error || data.error || null;
         const tone = failure ? 'error' : view.tone;
         const todayUsd = snapshot?.today ? snapshot.today.chargedUsd : null;
-        const pillLabel = [
+        const railA11y = [
           view.label,
           view.ratio === null ? null : percent(view.ratio),
           view.text,
@@ -712,6 +711,7 @@ window.__ModuleLoader__.load({
         ]
           .filter(Boolean)
           .join(' · ');
+        const railText = view.ratio === null ? view.label : `${view.label} ${percent(view.ratio)}`;
 
         const save = async (value) => {
           setSaving(true);
@@ -730,40 +730,20 @@ window.__ModuleLoader__.load({
 
         return h(
           'div',
-          { className: 'r4u-root' },
-          h('style', null, CSS),
-          h(
-            'button',
-            {
-              type: 'button',
-              className: 'r4u-pill',
-              onClick: () => setExpanded((value) => !value),
-              'aria-expanded': expanded,
-              'aria-busy': data.busy || undefined,
-              'aria-label': pillLabel || undefined,
-              title: failure ? failureText(failure, t, snapshot?.baseUrl) : expanded ? t('collapse') : t('expand'),
+          {
+            className: 'r4u-drawer',
+            onKeyDown: (event) => {
+              if (event.key === 'Escape') {
+                event.preventDefault();
+                setExpanded(false);
+              }
             },
-            h('span', { className: 'r4u-dot', 'aria-hidden': true, style: { background: TONE_COLOR[tone] } }),
-            h('span', { className: 'r4u-pill-label' }, view.label),
-            view.ratio === null ? null : h('span', { className: 'r4u-pill-percent' }, percent(view.ratio)),
-            view.ratio === null
-              ? null
-              : h('span', { className: 'r4u-pill-bar', 'aria-hidden': true }, h(Bar, { value: view.ratio, tone, label: view.label, height: 4 })),
-            view.text ? h('span', { className: 'r4u-pill-value' }, view.text) : null,
-            h('span', { className: 'r4u-chevron' + (expanded ? ' r4u-chevron-open' : ''), 'aria-hidden': true }, '▾'),
-          ),
+          },
+          h('style', null, CSS),
           expanded && snapshot
             ? h(
                 'div',
-                {
-                  className: 'r4u-expand',
-                  onKeyDown: (event) => {
-                    if (event.key === 'Escape') {
-                      event.preventDefault();
-                      setExpanded(false);
-                    }
-                  },
-                },
+                { className: 'r4u-panel', id: panelId, role: 'region', 'aria-label': t('railLabel') },
                 h(Detail, {
                   snapshot,
                   busy: data.busy,
@@ -781,18 +761,36 @@ window.__ModuleLoader__.load({
                 }),
               )
             : null,
+          h(
+            'button',
+            {
+              type: 'button',
+              className: 'r4u-rail',
+              onClick: () => setExpanded((value) => !value),
+              'aria-expanded': expanded,
+              'aria-controls': expanded ? panelId : undefined,
+              'aria-busy': data.busy || undefined,
+              'aria-label': railA11y || undefined,
+              title: failure ? failureText(failure, t, snapshot?.baseUrl) : expanded ? t('collapse') : t('expand'),
+            },
+            h('span', { className: 'r4u-dot', 'aria-hidden': true, style: { background: TONE_COLOR[tone] } }),
+            h('span', { className: 'r4u-rail-text' }, railText),
+            view.text ? h('span', { className: 'r4u-rail-value' }, view.text) : null,
+            h('span', { className: 'r4u-rail-chevron', 'aria-hidden': true }, expanded ? '›' : '‹'),
+          ),
         );
       }
 
-      ctx.slots.inject(DOCK_SLOT, () =>
+      ctx.slots.inject(OVERLAY_SLOT, () =>
         ctx.slots.register(
           {
-            name: DOCK_SLOT,
-            id: DOCK_ID,
-            order: 2,
+            name: OVERLAY_SLOT,
+            id: OVERLAY_ID,
+            order: 10,
+            label: () => t('railLabel'),
             locale: NS,
           },
-          UsageCard,
+          UsageDrawer,
         ),
       );
     }

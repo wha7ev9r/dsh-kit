@@ -11,7 +11,7 @@
 | [`@wha7ever/dsh-web-search-anysearch`](packages/dsh-web-search-anysearch) | Host | Community fork of `@anysearch/anysearch-dsh` kept installable on DSH 0.1.7/0.2: AnySearch web search and fetch providers plus the `anysearch_*` tools. |
 | [`@wha7ever/dsh-gotify-notify`](packages/dsh-gotify-notify) | Host + Client | Gotify push alerts when the harness asks a question, waits for an approval, finishes a turn, or fails, with a settings page for the server, credential, priority, and triggers. |
 | [`@wha7ever/dsh-plugin-updates`](packages/dsh-plugin-updates) | Host + Client | Lazy update checks for installed third-party and official plugins, reported on the Plugins page with a copyable upgrade command. Read-only: it never installs or removes a package. |
-| [`@wha7ever/dsh-r4-usage`](packages/dsh-r4-usage) | Host + Client | An r4 plan, spend-window, and key-limit dashboard under the composer: progress bars, a seven-day charge chart, and the per-model split. |
+| [`@wha7ever/dsh-r4-usage`](packages/dsh-r4-usage) | Host + Client | An r4 plan, spend-window, and key-limit dashboard as a collapsible right-edge drawer: progress bars, a seven-day charge chart, and the per-model split. |
 
 All packages are ordinary DSH bundles. After publication, install the exact version that matches the compatibility baseline:
 

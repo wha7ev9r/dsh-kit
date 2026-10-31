@@ -1,7 +1,7 @@
 {
   "name": "@wha7ever/dsh-r4-usage",
   "version": "0.1.0",
-  "description": "r4 usage dashboard for DeepSeek Harness: a right-aligned composer-dock card and detail panel with plan, spend-window, and API-key progress bars",
+  "description": "r4 usage dashboard for DeepSeek Harness: a right-edge collapsible drawer with plan, spend-window, and API-key progress bars",
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
