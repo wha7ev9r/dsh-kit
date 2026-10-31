@@ -172,12 +172,14 @@ window.__ModuleLoader__.load({
 
     const CSS = `
 .r4u-drawer { position: fixed; right: 12px; top: 84px; z-index: 40; display: flex; flex-direction: row; align-items: flex-start; gap: 8px; pointer-events: auto; color: var(--dsw-alias-label-secondary); font-size: 11px; line-height: 1.45; }
-.r4u-rail { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; width: 30px; padding: 10px 4px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 10px; background: var(--dsw-alias-bg-layer-2); color: inherit; font: inherit; font-size: 11px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.r4u-rail { display: inline-flex; flex-direction: column; align-items: center; gap: 5px; width: 76px; padding: 8px 6px; border: 1px solid var(--dsw-alias-border-l1); border-radius: 10px; background: var(--dsw-alias-bg-layer-2); color: inherit; font: inherit; font-size: 11px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
 .r4u-rail:hover { background: var(--dsw-alias-bg-overlay); border-color: var(--dsw-alias-border-l2); }
 .r4u-rail:focus-visible { outline: 2px solid var(--dsw-alias-brand-primary); outline-offset: 1px; }
 .r4u-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
-.r4u-rail-text { writing-mode: vertical-rl; white-space: nowrap; letter-spacing: .4px; }
-.r4u-rail-value { writing-mode: vertical-rl; white-space: nowrap; color: var(--dsw-alias-label-primary); font-variant-numeric: tabular-nums; }
+.r4u-rail-head { display: inline-flex; align-items: center; gap: 5px; max-width: 100%; }
+.r4u-rail-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 58px; }
+.r4u-rail-percent { color: var(--dsw-alias-label-primary); font-size: 13px; font-variant-numeric: tabular-nums; }
+.r4u-rail-value { color: var(--dsw-alias-label-primary); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .r4u-rail-chevron { font-size: 10px; }
 .r4u-panel { width: min(300px, 84vw); animation: r4u-out .18s ease; }
 @keyframes r4u-out { from { opacity: 0; transform: translateX(6px); } to { opacity: 1; transform: none; } }
@@ -711,7 +713,6 @@ window.__ModuleLoader__.load({
         ]
           .filter(Boolean)
           .join(' · ');
-        const railText = view.ratio === null ? view.label : `${view.label} ${percent(view.ratio)}`;
 
         const save = async (value) => {
           setSaving(true);
@@ -773,8 +774,13 @@ window.__ModuleLoader__.load({
               'aria-label': railA11y || undefined,
               title: failure ? failureText(failure, t, snapshot?.baseUrl) : expanded ? t('collapse') : t('expand'),
             },
-            h('span', { className: 'r4u-dot', 'aria-hidden': true, style: { background: TONE_COLOR[tone] } }),
-            h('span', { className: 'r4u-rail-text' }, railText),
+            h(
+              'span',
+              { className: 'r4u-rail-head' },
+              h('span', { className: 'r4u-dot', 'aria-hidden': true, style: { background: TONE_COLOR[tone] } }),
+              h('span', { className: 'r4u-rail-label' }, view.label),
+            ),
+            view.ratio === null ? null : h('span', { className: 'r4u-rail-percent' }, percent(view.ratio)),
             view.text ? h('span', { className: 'r4u-rail-value' }, view.text) : null,
             h('span', { className: 'r4u-rail-chevron', 'aria-hidden': true }, expanded ? '›' : '‹'),
           ),

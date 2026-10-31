@@ -1,6 +1,6 @@
 # @wha7ever/dsh-r4-usage
 
-An r4 usage dashboard for DeepSeek Harness. It pins a collapsed rail to the right edge of the window through the `shell.overlay` layer — outside every column and scroll container — and expands it into a detail panel: plan budget, every spend window, the API key's own limit, today's requests and tokens, the last seven days of charges, and the per-model split, each budget as a progress bar with the remaining share.
+An r4 usage dashboard for DeepSeek Harness. It pins a collapsed card to the right edge of the window through the `shell.overlay` layer — outside every column and scroll container — and expands it into a detail panel: plan budget, every spend window, the API key's own limit, today's requests and tokens, the last seven days of charges, and the per-model split, each budget as a progress bar with the remaining share.
 
 The numbers come from the documented read-only `/v1/cli` endpoints of the r4 API:
 
@@ -50,7 +50,7 @@ The key is entered in the expanded card and written through `ctx.credentials.set
 
 ## Behaviour
 
-- Collapsed by default to a 30 px vertical rail (state dot, label, used share, remaining budget). Expanding opens a 300 px panel beside it, capped at `min(70vh, 560px)` with its own scroll, and Escape collapses it. Because it renders in `shell.overlay`, it overlays the frame instead of pushing the composer or the shipped usage data.
+- Collapsed by default to a 76 px card at the right edge, stacking the state dot and label, the used share, and the remaining budget as horizontal text (no rotated glyphs). Expanding opens a 300 px panel beside it, capped at `min(70vh, 560px)` with its own scroll, and Escape collapses it. Because it renders in `shell.overlay`, it overlays the frame instead of pushing the composer or the shipped usage data.
 - Polls at the Host's `refreshMs` (60 s by default) while mounted, plus one forced read when Refresh is pressed (minimum 5 s between forced reads). The host caches one snapshot and de-duplicates concurrent reads, so several sessions share one read instead of polling independently.
 - The seven-day series is padded to seven buckets from its last day (or the response's `day`), so a short or missing response still draws a full week.
 - A failed refresh keeps the last good numbers and shows the failure on the panel, so a temporary outage does not blank the rail.
